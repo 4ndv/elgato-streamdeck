@@ -371,11 +371,6 @@ impl StreamDeck {
             return Err(StreamDeckError::InvalidKeyIndex);
         }
 
-        // Key count is 9 for Akp03*, but only the first 6 have screens, so don't output anything after 6
-        if (self.kind == Kind::Akp03E || self.kind == Kind::Akp03R) && key > 6 {
-            return Ok(());
-        }
-
         let key = if let Kind::Original = self.kind {
             flip_key_index(&self.kind, key)
         } else if let Kind::Akp153 | Kind::Akp153E | Kind::Akp153R | Kind::MiraBoxHSV293S = self.kind {
